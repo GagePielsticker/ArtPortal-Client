@@ -4,21 +4,52 @@
   "description": "A art reference library tool",
   "main": "./src/index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "gh-publish": "electron-builder --win -p always"
   },
   "keywords": [
     "art",
     "reference",
     "tool"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JamesPielstickerPortfolio/ArtPortal-Client.git"
+  },
   "author": "James Pielsticker",
   "license": "MIT",
   "devDependencies": {
     "electron": "^17.0.0",
-    "electron-packager": "^15.4.0",
+    "electron-builder": "^22.14.13",
     "standard": "^16.0.4"
   },
   "dependencies": {
+    "electron-updater": "^4.6.5",
     "nedb": "^1.8.0"
+  },
+  "build" : {
+    "appId": "com.electron.artportal",
+    "productName": "ArtPortal",
+    "copyright": "Copyright © year James Pielsticker",
+    "win" : {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "./icon.png"
+    }
   }
 }
