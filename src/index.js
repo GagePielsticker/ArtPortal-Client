@@ -3,6 +3,8 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const { autoUpdater } = require("electron-updater")
+const log = require('electron-log')
 
 // Global setup
 let loadingScreen
@@ -20,6 +22,7 @@ const mainWindowConfig = {
 }
 
 const createAppLoader = () => {
+  
   // Create the loader window.
   loadingScreen = new BrowserWindow({
     width: loadingScreenConfig.width,
@@ -36,6 +39,7 @@ const createAppLoader = () => {
 
   // Once loading screen loads, show it
   loadingScreen.webContents.on('did-finish-load', () => {
+    log.info(`Loaded Updater.`)
     loadingScreen.show()
   })
 }
@@ -62,6 +66,7 @@ const createAppWindow = () => {
     if (loadingScreen) {
       loadingScreen.close()
     }
+    log.info(`Loaded Main Windows, closing updater.`)
     mainWindow.show()
   })
 }
@@ -69,14 +74,24 @@ const createAppWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createAppLoader()
-  createAppWindow()
+app.whenReady().then(async () => {
+  log.info(`Electron Initialized.`)
 
-  app.on('activate', () => {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  createAppLoader() //Create loading & update checking window
+  autoUpdater.checkForUpdatesAndNotify() //Check for updates on github repo
+  .then(r => {
+    log.info(`Successfully loaded update: ${r}`)
+    createAppWindow()
+
+    app.on('activate', () => {
+      // On macOS it's common to re-create a window in the app when the
+      // dock icon is clicked and there are no other windows open.
+      if (BrowserWindow.getAllWindows().length === 0) createAppWindow()
+    })
+  })
+  .catch(e => { //Could not load update system
+    log.warn(`COULD NOT LOAD UDPATES: ${e}`)
+    createAppWindow()
   })
 })
 

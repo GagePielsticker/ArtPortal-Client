@@ -1,6 +1,6 @@
 {
   "name": "artportal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A art reference library tool",
   "main": "./src/index.js",
   "scripts": {
@@ -25,14 +25,15 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
+    "electron-log": "^4.4.6",
     "electron-updater": "^4.6.5",
     "nedb": "^1.8.0"
   },
-  "build" : {
+  "build": {
     "appId": "com.electron.artportal",
     "productName": "ArtPortal",
     "copyright": "Copyright © year James Pielsticker",
-    "win" : {
+    "win": {
       "target": [
         {
           "target": "nsis",
