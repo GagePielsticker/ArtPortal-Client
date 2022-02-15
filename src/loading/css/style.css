@@ -34,6 +34,15 @@ background-color: #2C2F33;
     top: 50px;
 }
 
+#downloadProg {
+  width: 70%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  display: hidden;
+}
+
 #footer {
     font-size: .8rem;
     color: white;

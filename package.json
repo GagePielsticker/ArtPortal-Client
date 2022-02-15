@@ -1,6 +1,6 @@
 {
   "name": "artportal",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "A art reference library tool",
   "main": "./src/index.js",
   "scripts": {

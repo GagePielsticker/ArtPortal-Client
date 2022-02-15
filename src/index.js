@@ -29,7 +29,11 @@ const createAppLoader = () => {
   loadingScreen = new BrowserWindow({
     width: loadingScreenConfig.width,
     height: loadingScreenConfig.height,
-    frame: false,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+    //frame: false,
     transparent: true
   })
   loadingScreen.setResizable(false)
@@ -79,34 +83,48 @@ const createAppWindow = () => {
 app.whenReady().then(async () => {
   log.info(`Electron Initialized.`)
 
+  createAppLoader() //Create loading & update checking window
   autoUpdater.checkForUpdates()
-  
+
   autoUpdater.on('checking-for-update', () => {
-    createAppLoader() //Create loading & update checking window
+    if(loadingScreen) {
+      loadingScreen.webContents.send('message', 'Checking for updates') //Message the window to alert user
+    }
   })
 
   autoUpdater.on('update-available', () => {
     if(loadingScreen) {
-      loadingScreen.webContents.send('message', 'Downloading Update') //Message the window to alert user
+      loadingScreen.webContents.send('message', 'Downloading update')
     }
     log.info(`Update available. Downloading...`)
   })
 
+  autoUpdater.on('download-progress', progressObj => {
+    if(loadingScreen) {
+      loadingScreen.webContents.send('loadprog', `${progressObj.percent}`)
+    }
+  })
+
   autoUpdater.on('update-downloaded', () => {
     if(loadingScreen) {
-      loadingScreen.webContents.send('message', 'Update Downloaded')
+      loadingScreen.webContents.send('message', 'Update downloaded')
     }
     log.info('Downloaded update.')
     autoUpdater.quitAndInstall()
   })
 
   autoUpdater.on('before-quit-for-update', () => {
-    loadingScreen.webContents.send('message', 'Installing Update')
+    if(loadingScreen) {
+      loadingScreen.webContents.send('message', 'Installing update') 
+    }
     log.info('Restarting application to install.')
   })
 
   autoUpdater.on('update-not-available', () => {
     log.info(`No update available.`)
+    if(loadingScreen) {
+      loadingScreen.webContents.send('message', 'Loading app')
+    }
     createAppWindow()
   })
 

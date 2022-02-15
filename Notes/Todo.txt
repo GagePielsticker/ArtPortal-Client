@@ -1,3 +1,15 @@
+
+TODO
+- Loading bar with % downlaoded
+
+FEATURES ADDED CURRENTLY
+
+- Update checking pre-loader
+- Auto updater through github releases
+- Logging in APPDATA/Roaming/artportal
+
+
+IDEAS
 Tie tags to the image file hash
 
 store tags tied to image in sqlite
@@ -10,11 +22,3 @@ load images from folder and all subfolders
 //Database cannot be read, please restart. error
 
 save user settings (image folder path)
-
-implament update server
-https://github.com/ArekSredzki/electron-release-server
-
-
-done
-update tags logic
-getting tags logic

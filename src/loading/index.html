@@ -23,6 +23,7 @@
             <div class="bar three"></div>
           </div>
         <span id="loadingText">Checking for updates</span>
+        <progress id="downloadProg" value="0" max="100"></progress>
 
         <div id="footer">
             <small>Having trouble loading?</small>
@@ -37,7 +38,20 @@
 
       ipcRenderer.on('message', (event, data) => {
           console.log('received data', data)
-          document.getElementById('loadingText').innerHTML=data
+          document.getElementById('loadingText').innerHTML = data
+          if(data == 'Downloading update') {
+            document.getElementById('downloadProg').style.display = 'block'
+          }
+
+          if(data == 'Update downloaded') {
+            document.getElementById('downloadProg').style.display = 'hidden'
+          }
+      })
+
+      ipcRenderer.on('loadprog', (event, data) => {
+        console.log('received data', data)
+        let val = data.replace('%', '')
+        document.getElementById('downloadProg').value = val
       })
     </script>
   </body>
