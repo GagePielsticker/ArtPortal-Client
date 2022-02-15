@@ -1,0 +1,24 @@
+{
+  "name": "artportal",
+  "version": "1.0.0",
+  "description": "A art reference library tool",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "art",
+    "reference",
+    "tool"
+  ],
+  "author": "James Pielsticker",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^17.0.0",
+    "electron-packager": "^15.4.0",
+    "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "nedb": "^1.8.0"
+  }
+}

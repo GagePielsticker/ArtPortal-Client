@@ -1,0 +1,20 @@
+Tie tags to the image file hash
+
+store tags tied to image in sqlite
+
+max tags 10
+
+load images from folder and all subfolders
+
+
+//Database cannot be read, please restart. error
+
+save user settings (image folder path)
+
+implament update server
+https://github.com/ArekSredzki/electron-release-server
+
+
+done
+update tags logic
+getting tags logic
