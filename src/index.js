@@ -20,6 +20,8 @@ const mainWindowConfig = {
   backgroundColor: '#2C2F33',
   landing: './src/app/index.html'
 }
+log.info(`=====================================`)
+log.info(`App started on version: ${app.getVersion}`)
 
 const createAppLoader = () => {
   
@@ -77,21 +79,47 @@ const createAppWindow = () => {
 app.whenReady().then(async () => {
   log.info(`Electron Initialized.`)
 
-  createAppLoader() //Create loading & update checking window
-  autoUpdater.checkForUpdatesAndNotify() //Check for updates on github repo
-  .then(r => {
-    log.info(`Successfully loaded update: ${r}`)
-    createAppWindow()
-
-    app.on('activate', () => {
-      // On macOS it's common to re-create a window in the app when the
-      // dock icon is clicked and there are no other windows open.
-      if (BrowserWindow.getAllWindows().length === 0) createAppWindow()
-    })
+  autoUpdater.checkForUpdates()
+  
+  autoUpdater.on('checking-for-update', () => {
+    createAppLoader() //Create loading & update checking window
   })
-  .catch(e => { //Could not load update system
+
+  autoUpdater.on('update-available', () => {
+    if(loadingScreen) {
+      loadingScreen.webContents.send('message', 'Downloading Update') //Message the window to alert user
+    }
+    log.info(`Update available. Downloading...`)
+  })
+
+  autoUpdater.on('update-downloaded', () => {
+    if(loadingScreen) {
+      loadingScreen.webContents.send('message', 'Update Downloaded')
+    }
+    log.info('Downloaded update.')
+    autoUpdater.quitAndInstall()
+  })
+
+  autoUpdater.on('before-quit-for-update', () => {
+    loadingScreen.webContents.send('message', 'Installing Update')
+    log.info('Restarting application to install.')
+  })
+
+  autoUpdater.on('update-not-available', () => {
+    log.info(`No update available.`)
+    createAppWindow()
+  })
+
+  autoUpdater.on('error', e => {
     log.warn(`COULD NOT LOAD UDPATES: ${e}`)
     createAppWindow()
+  })
+
+
+  app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) createAppWindow()
   })
 })
 

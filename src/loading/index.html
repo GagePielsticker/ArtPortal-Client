@@ -31,5 +31,14 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const { ipcRenderer } = require("electron")
+
+      ipcRenderer.on('message', (event, data) => {
+          console.log('received data', data)
+          document.getElementById('loadingText').innerHTML=data
+      })
+    </script>
   </body>
 </html>
