@@ -47,9 +47,9 @@ module.exports = client => {
    */
   client.isSetupComplete = () => {
     return new Promise((resolve, reject) => {
+      log.info('Running isSetupComplete()')
 
       client.db.getField('settings', location, 'setupFinished', (succ, data) => {
-        log.info('Checking if first start on database.')
 
         //If record doesnt exist, create it
         if(!succ) {
@@ -63,8 +63,32 @@ module.exports = client => {
         } else {
           if(data[0]) return resolve() //Setup complete already
         }
+
         return reject()
       })
+    })
+  }
+
+  /**
+   * Changes the entry of our setup status in the DB
+   * @param {Boolean} status 
+   * @returns 
+   */
+  client.changeSetupStatus = status => {
+    return new Promise((resolve, reject) => {
+      log.info('Running changeSetupStatus()')
+
+      client.db.updateRow('settings', location, {setupFinished : false}, {setupFinished: status}, (succ, msg) => {
+        if(succ) {
+          log.info('Successfully changed setupFinished status.')
+          resolve()
+        }
+        else {
+          log.warn(`Could not change setupFinished status: ${msg}`)
+          reject()
+        }
+      })
+
     })
   }
 
