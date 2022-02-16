@@ -12,14 +12,14 @@ let loadingScreen
 const loadingScreenConfig = {
   width: 300,
   height: 500,
-  landing: 'file://' + __dirname + '/loading/index.html'
+  landing: 'file://' + __dirname + '/app/loading.html'
 }
 
 const mainWindowConfig = {
   width: 1280,
   height: 720,
   backgroundColor: '#2C2F33',
-  landing: './src/app/index.html'
+  landing: './src/app/main.html'
 }
 
 log.info('=====================================')
