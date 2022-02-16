@@ -24,6 +24,7 @@
           </div>
         <span id="loadingText">Checking for updates</span>
         <progress id="downloadProg" value="0" max="100"></progress>
+        <span id="downloadSpeed"></span>
 
         <div id="footer">
             <small>Having trouble loading?</small>
@@ -41,10 +42,12 @@
           document.getElementById('loadingText').innerHTML = data
           if(data == 'Downloading update') {
             document.getElementById('downloadProg').style.display = 'block'
+            document.getElementById('downloadSpeed').style.display = 'block'
           }
 
           if(data == 'Update downloaded') {
-            document.getElementById('downloadProg').style.display = 'hidden'
+            document.getElementById('downloadProg').style.display = 'none'
+            document.getElementById('downloadSpeed').style.display = 'none'
           }
       })
 
@@ -52,6 +55,11 @@
         console.log('received data', data)
         let val = data.replace('%', '')
         document.getElementById('downloadProg').value = val
+      })
+
+      ipcRenderer.on('downloadspeed', (event, data) => {
+        console.log('received data', data)
+        document.getElementById('downloadSpeed').innerHTML = `${(parseFloat(data)/125000/8).toFixed(2)} MB/s`
       })
     </script>
   </body>

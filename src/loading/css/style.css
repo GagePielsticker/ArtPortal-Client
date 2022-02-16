@@ -1,4 +1,10 @@
 
+html, body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
 .LoaderWrapper {
 position: absolute;
 top: 0;
@@ -19,9 +25,18 @@ background-color: #2C2F33;
 }
 
 .LoaderContent {
-    font-family: 'Roboto', sans-serif;
-    color: white;
-    text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+#downloadSpeed {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: .5rem;
+  display:none;
 }
 
 #topicon {
@@ -35,12 +50,14 @@ background-color: #2C2F33;
 }
 
 #downloadProg {
-  width: 70%;
   align-content: center;
   justify-content: center;
   align-items: center;
   justify-items: center;
-  display: hidden;
+  display: none;
+  width: 70%;
+  margin-left: auto; 
+  margin-right:auto;
 }
 
 #footer {

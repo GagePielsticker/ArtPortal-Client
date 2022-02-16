@@ -33,6 +33,10 @@
     "appId": "com.electron.artportal",
     "productName": "ArtPortal",
     "copyright": "Copyright © year James Pielsticker",
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
     "win": {
       "target": [
         {

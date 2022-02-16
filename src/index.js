@@ -33,9 +33,10 @@ const createAppLoader = () => {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    //frame: false,
+    frame: false,
     transparent: true
   })
+
   loadingScreen.setResizable(false)
 
   loadingScreen.loadURL(loadingScreenConfig.landing)
@@ -102,6 +103,7 @@ app.whenReady().then(async () => {
   autoUpdater.on('download-progress', progressObj => {
     if(loadingScreen) {
       loadingScreen.webContents.send('loadprog', `${progressObj.percent}`)
+      loadingScreen.webContents.send('downloadspeed', `${progressObj.bytesPerSecond}`)
     }
   })
 

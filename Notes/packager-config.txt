@@ -1,5 +1,0 @@
-win32
-electron-packager ./ ArtPortal --app-version=1.0.0 --icon=./icon.ico --platform=win32 --out=release-builds --prune=true
-
-mac
-electron-packager ./ ArtPortal --app-version=1.0.0 --icon=./icon.ico --platform=darwin --out=release-builds --prune=true

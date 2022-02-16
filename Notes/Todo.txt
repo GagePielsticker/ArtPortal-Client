@@ -1,12 +1,12 @@
 
 TODO
-- Loading bar with % downlaoded
 
 FEATURES ADDED CURRENTLY
 
-- Update checking pre-loader
-- Auto updater through github releases
-- Logging in APPDATA/Roaming/artportal
+- Pre-loader/Update-checker GUI
+- Auto updating on launch through github releases
+- Installer building for win x64 & ia32
+- Logging System
 
 
 IDEAS
