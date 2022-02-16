@@ -1,0 +1,39 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+:root {
+    --primary: #17c5c2;
+    --textlight: #fff;
+    --dark: #2C2F33;
+    --darker: #161718;
+}
+
+#setup {
+    background-color: var(--dark);
+}
+
+#waves {
+    pointer-events:none;
+}
+
+#warningAlert {
+    width: 80%;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--dark);
+}
+
+.btn-primary:hover {
+    color: var(--dark);
+    background-color: var(--textlight);
+}
+
+.btn-primary:active {
+    color: var(--dark);
+    background-color: var(--textlight);
+}

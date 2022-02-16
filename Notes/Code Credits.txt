@@ -1,1 +1,3 @@
 Loading Bars by "BlackCat" on Codepen
+https://www.npmjs.com/package/canvas-confetti 
+https://github.com/animate-css/animate.css

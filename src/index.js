@@ -8,6 +8,9 @@ const log = require('electron-log')
 
 // Global setup
 let loadingScreen
+let showMenu = false
+
+if (process.argv.includes('-d')) showMenu = true // If developer argument passed it will show context menus
 
 const loadingScreenConfig = {
   width: 300,
@@ -32,9 +35,10 @@ const createAppLoader = () => {
     height: loadingScreenConfig.height,
     webPreferences: {
       nodeIntegration: true,
+      nodeIntegrationInWorker: true,
       contextIsolation: false
     },
-    frame: false,
+    frame: showMenu,
     transparent: true
   })
 
@@ -59,12 +63,14 @@ const createAppWindow = () => {
     height: mainWindowConfig.height,
     webPreferences: {
       nodeIntegration: true,
+      nodeIntegrationInWorker: true,
       contextIsolation: false
     },
     show: false // Do not show initially
   })
 
-  // mainWindow.removeMenu() // hide toolbar
+  if (!showMenu) mainWindow.removeMenu()
+
   mainWindow.setBackgroundColor(mainWindowConfig.backgroundColor) // set background color
 
   // and load the index.html of the app.

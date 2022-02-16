@@ -72,7 +72,7 @@ module.exports = client => {
    * @param {Boolean} status
    * @returns
    */
-  client.changeSetupStatus = status => {
+   client.changeSetupStatus = status => {
     return new Promise((resolve, reject) => {
       log.info('Running changeSetupStatus()')
 
@@ -85,6 +85,19 @@ module.exports = client => {
           reject()
         }
       })
+    })
+  }
+
+  /**
+   * Changes directory path saved
+   * @param {String} path 
+   * @returns 
+   */
+  client.changeDirectoryPath = path => {
+    return new Promise((resolve, reject) => {
+      log.info('Running changeDirectoryPath()')
+
+      
     })
   }
 }
