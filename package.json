@@ -26,6 +26,7 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
+    "electron-db": "^0.15.7",
     "electron-log": "^4.4.6",
     "electron-updater": "^4.6.5"
   },

@@ -3,6 +3,8 @@ Primary TODO
 - Error alert system
 - Find a database system
 
+CLEAR JSON SETTINGS BEFORE PUSH
+
 ERROR HANDLING TODO
 //Database cannot be read, please restart. error
 
