@@ -1,7 +1,7 @@
 Primary TODO
-- Write a readme
 - Prototype application functions & ui
 - Error alert system
+- Find a database system
 
 ERROR HANDLING TODO
 //Database cannot be read, please restart. error

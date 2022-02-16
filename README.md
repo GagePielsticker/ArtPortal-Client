@@ -16,7 +16,6 @@ An Electron based art reference organizer made for the open source community.
 
 ## Infrastructure
 - **Electron**
-- **NeDB** - Used for tag and setting storage
 - **Electron** - builder & Electron-updater - Used for building distributions and auto updating through github releases.
 - **Bootstrap** - CSS Framework
 ## Contributing
