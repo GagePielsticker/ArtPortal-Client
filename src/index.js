@@ -8,6 +8,7 @@ const log = require('electron-log')
 
 // Global setup
 let loadingScreen
+
 const loadingScreenConfig = {
   width: 300,
   height: 500,
@@ -20,6 +21,7 @@ const mainWindowConfig = {
   backgroundColor: '#2C2F33',
   landing: './src/app/index.html'
 }
+
 log.info('=====================================')
 log.info(`App started on version: ${app.getVersion}`)
 
