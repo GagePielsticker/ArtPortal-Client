@@ -1,13 +1,13 @@
 'use strict'
 
 module.exports = client => {
+
   // Sometimes client does not load in time so we scan it until it exist then start the app
   const log = require('electron-log')
   const hashWorker = new Worker('./js/hash_worker.js', { type: 'module' })
 
   const imageArray = []
   const hashArray = []
-
 
   const checkInterval = setInterval(() => {
     if (client != null) loadApp()
@@ -30,6 +30,7 @@ module.exports = client => {
 
     // Our warn alert
     function warn (str) {
+      log.info(`Warn executing: ${str}`)
       const alert = document.getElementById('warningAlert')
       alert.innerHTML = str
       alert.classList.remove('d-none')
@@ -58,7 +59,7 @@ module.exports = client => {
       }, 800)
     })
 
-    //On stage 2 button click
+    // On stage 2 button click
     document.getElementById('stage2NextButton').addEventListener('click', () => {
       const folderSel = document.getElementById('folderSelect')
 
@@ -67,27 +68,27 @@ module.exports = client => {
         return warn('No input folder given.')
       }
 
-      //store to global array, calculate hashes on second array
-      let hashedSuccessful = 0
+      // store to global array, calculate hashes on second array
+      const hashedSuccessful = 0
 
-      for (let i = 0; i < folderSel.files.length; i++) { //For each item in the FileStore
-        let file = folderSel.files.item(i)
-        let path = file.path
+      for (let i = 0; i < folderSel.files.length; i++) { // For each item in the FileStore
+        const file = folderSel.files.item(i)
+        const path = file.path
 
-        let extension = path.split('.')[path.split('.').length - 1]
+        const extension = path.split('.')[path.split('.').length - 1]
 
-        if(
-          extension == 'png'
-          || extension == 'jpg'
-          || extension == 'gif'
-          || extension == 'jpeg'
+        if (
+          extension == 'png' ||
+          extension == 'jpg' ||
+          extension == 'gif' ||
+          extension == 'jpeg'
         ) {
           imageArray.push(file.path) // Push to our file array if its a png,jpg,gif,or jpeg
         }
       }
 
       // Done filtering files
-      let setupDiv = document.getElementById('setup')
+      const setupDiv = document.getElementById('setup')
       setupDiv.classList.add('animate__fast')
       setupDiv.classList.add('animate__fadeOutUp')
       setTimeout(() => {
@@ -95,7 +96,7 @@ module.exports = client => {
       }, 800)
 
       client.changeSetupStatus(true)
-      //TODO client.changeImageDirectory(path)
+      // TODO client.changeImageDirectory(path)
     })
   }
 }

@@ -31,16 +31,6 @@ module.exports = client => {
     }
   })
 
-  // MD5 String, tags array - adds tags to md5 entry
-  client.updateTags = async (md5hash, tags) => {
-
-  }
-
-  // Get tags from a specific md5 hash
-  client.getTags = async (md5hash) => {
-
-  }
-
   /**
    * Check to see if the user has completed setup
    * @returns <Promise> resolves if setup is complete, reject if not
@@ -72,7 +62,7 @@ module.exports = client => {
    * @param {Boolean} status
    * @returns
    */
-   client.changeSetupStatus = status => {
+  client.changeSetupStatus = status => {
     return new Promise((resolve, reject) => {
       log.info('Running changeSetupStatus()')
 
@@ -90,14 +80,12 @@ module.exports = client => {
 
   /**
    * Changes directory path saved
-   * @param {String} path 
-   * @returns 
+   * @param {String} path
+   * @returns
    */
   client.changeDirectoryPath = path => {
     return new Promise((resolve, reject) => {
       log.info('Running changeDirectoryPath()')
-
-      
     })
   }
 }
