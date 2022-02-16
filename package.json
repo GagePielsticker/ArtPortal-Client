@@ -1,7 +1,7 @@
 {
   "name": "artportal",
   "version": "0.0.1",
-  "description": "A art reference library tool",
+  "description": "An Electron based art reference organizer made for the open source community.",
   "main": "./src/index.js",
   "scripts": {
     "start": "electron .",
@@ -11,7 +11,8 @@
   "keywords": [
     "art",
     "reference",
-    "tool"
+    "organizer",
+    "electron"
   ],
   "repository": {
     "type": "git",
