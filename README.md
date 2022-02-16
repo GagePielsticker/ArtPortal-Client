@@ -16,7 +16,8 @@ An Electron based art reference organizer made for the open source community.
 
 ## Infrastructure
 - **Electron**
-- **Electron** - builder & Electron-updater - Used for building distributions and auto updating through github releases.
+- **Electron-builder & Electron-updater** - Used for building distributions and auto updating through github releases.
+- **Electron-db** - Database
 - **Bootstrap** - CSS Framework
 ## Contributing
 
