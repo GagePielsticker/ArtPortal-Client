@@ -3,7 +3,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const { autoUpdater } = require("electron-updater")
+const { autoUpdater } = require('electron-updater')
 const log = require('electron-log')
 
 // Global setup
@@ -20,18 +20,17 @@ const mainWindowConfig = {
   backgroundColor: '#2C2F33',
   landing: './src/app/index.html'
 }
-log.info(`=====================================`)
+log.info('=====================================')
 log.info(`App started on version: ${app.getVersion}`)
 
 const createAppLoader = () => {
-  
   // Create the loader window.
   loadingScreen = new BrowserWindow({
     width: loadingScreenConfig.width,
     height: loadingScreenConfig.height,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: false
     },
     frame: false,
     transparent: true
@@ -46,7 +45,7 @@ const createAppLoader = () => {
 
   // Once loading screen loads, show it
   loadingScreen.webContents.on('did-finish-load', () => {
-    log.info(`Loaded Updater.`)
+    log.info('Loaded Updater.')
     loadingScreen.show()
   })
 }
@@ -58,12 +57,12 @@ const createAppWindow = () => {
     height: mainWindowConfig.height,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-      },
+      contextIsolation: false
+    },
     show: false // Do not show initially
   })
 
-  //mainWindow.removeMenu() // hide toolbar
+  // mainWindow.removeMenu() // hide toolbar
   mainWindow.setBackgroundColor(mainWindowConfig.backgroundColor) // set background color
 
   // and load the index.html of the app.
@@ -73,7 +72,7 @@ const createAppWindow = () => {
     if (loadingScreen) {
       loadingScreen.close()
     }
-    log.info(`Loaded Main Windows, closing updater.`)
+    log.info('Loaded Main Windows, closing updater.')
     mainWindow.show()
   })
 }
@@ -82,33 +81,33 @@ const createAppWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
-  log.info(`Electron Initialized.`)
+  log.info('Electron Initialized.')
 
-  createAppLoader() //Create loading & update checking window
+  createAppLoader() // Create loading & update checking window
   autoUpdater.checkForUpdates()
 
   autoUpdater.on('checking-for-update', () => {
-    if(loadingScreen) {
-      loadingScreen.webContents.send('message', 'Checking for updates') //Message the window to alert user
+    if (loadingScreen) {
+      loadingScreen.webContents.send('message', 'Checking for updates') // Message the window to alert user
     }
   })
 
   autoUpdater.on('update-available', () => {
-    if(loadingScreen) {
+    if (loadingScreen) {
       loadingScreen.webContents.send('message', 'Downloading update')
     }
-    log.info(`Update available. Downloading...`)
+    log.info('Update available. Downloading...')
   })
 
   autoUpdater.on('download-progress', progressObj => {
-    if(loadingScreen) {
+    if (loadingScreen) {
       loadingScreen.webContents.send('loadprog', `${progressObj.percent}`)
       loadingScreen.webContents.send('downloadspeed', `${progressObj.bytesPerSecond}`)
     }
   })
 
   autoUpdater.on('update-downloaded', () => {
-    if(loadingScreen) {
+    if (loadingScreen) {
       loadingScreen.webContents.send('message', 'Update downloaded')
     }
     log.info('Downloaded update.')
@@ -116,15 +115,15 @@ app.whenReady().then(async () => {
   })
 
   autoUpdater.on('before-quit-for-update', () => {
-    if(loadingScreen) {
-      loadingScreen.webContents.send('message', 'Installing update') 
+    if (loadingScreen) {
+      loadingScreen.webContents.send('message', 'Installing update')
     }
     log.info('Restarting application to install.')
   })
 
   autoUpdater.on('update-not-available', () => {
-    log.info(`No update available.`)
-    if(loadingScreen) {
+    log.info('No update available.')
+    if (loadingScreen) {
       loadingScreen.webContents.send('message', 'Loading app')
     }
     createAppWindow()
@@ -134,7 +133,6 @@ app.whenReady().then(async () => {
     log.warn(`COULD NOT LOAD UDPATES: ${e}`)
     createAppWindow()
   })
-
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
