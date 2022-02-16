@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/JamesPielstickerPortfolio/ArtPortal-Client/assets/logo-long.png)
+![Logo](https://github.com/JamesPielstickerPortfolio/ArtPortal-Client/blob/main/assets/logo-long.png?raw=true)
 
 
  [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/JamesPielstickerPortfolio/ArtPortal-Client/blob/master/LICENSE.md) 
