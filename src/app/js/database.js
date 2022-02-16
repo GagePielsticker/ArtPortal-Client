@@ -41,5 +41,30 @@ module.exports = async client => {
 
   }
 
-  //client.updateTags("1", ["test", "test2"])
+  /**
+   * Check to see if the user has completed setup
+   * @returns <Promise> resolves if setup is complete, reject if not
+   */
+  client.isSetupComplete = () => {
+    return new Promise((resolve, reject) => {
+
+      client.db.getField('settings', location, 'setupFinished', (succ, data) => {
+        log.info('Checking if first start on database.')
+
+        //If record doesnt exist, create it
+        if(!succ) {
+          log.warn('setupFinished does not exist, writing.')
+          
+          client.db.insertTableContent('settings', location, { setupFinished: false}, (succ, msg) => {
+            if(succ) log.info('Inserted setupFinished Record.')
+            else log.warn(`Failed to insert first boot record: ${msg}`)
+          })
+
+        } else {
+          if(data[0]) return resolve() //Setup complete already
+        }
+        return reject()
+      })
+    })
+  }
 }
