@@ -1,5 +1,10 @@
+Primary TODO
+- Write a readme
+- Prototype application functions & ui
+- Error alert system
 
-TODO
+ERROR HANDLING TODO
+//Database cannot be read, please restart. error
 
 FEATURES ADDED CURRENTLY
 
@@ -8,17 +13,9 @@ FEATURES ADDED CURRENTLY
 - Installer building for win x64 & ia32
 - Logging System
 
-
 IDEAS
-Tie tags to the image file hash
+- Select folder to load into application, store location in DB
+- calculate MD5 hashes of images loaded in (from folder & all sub folders)
+- Tie tags in the DB to the images hash
+- Maximum tags per image 10
 
-store tags tied to image in sqlite
-
-max tags 10
-
-load images from folder and all subfolders
-
-
-//Database cannot be read, please restart. error
-
-save user settings (image folder path)
