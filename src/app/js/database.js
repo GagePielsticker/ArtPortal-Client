@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = async client => {
+module.exports = client => {
   client.db = require('electron-db')
   const path = require('path')
   const log = require('electron-log')
@@ -67,4 +67,5 @@ module.exports = async client => {
       })
     })
   }
+
 }
