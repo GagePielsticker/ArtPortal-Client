@@ -1,0 +1,7 @@
+- Push to github
+
+- npm run gh-publish (drafts a release on github, uploads files and tags it)
+- Go to the REPO and write a changelog on the version and publish the release draft
+
+
+TO SETUP electron-builder.env must exist. The key GH_TOKEN=xxx must also exist in it. THe token must have repo access

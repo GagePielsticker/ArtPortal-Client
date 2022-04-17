@@ -17,7 +17,6 @@ Long Term backend TODO
 
 Important notes
 - The database files are not tracked for development sake, if any changes to the current structure (ie new tables) occur, update git
-- when uploading remove the developer toolbar
 - only supports png, jpeg, gif, jpg
 
 FEATURES ADDED CURRENTLY
