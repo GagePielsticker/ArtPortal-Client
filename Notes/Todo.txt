@@ -1,8 +1,9 @@
 Primary TODO
+- Change database settings structure to be 1 document and find all[0] to call it. (CHANGE ISSETUPCOMPLETE STUFF TOO)
+
 - Prototype application functions & ui
 - Re-verify updater is working
-- client.changeDirectoryPath() & IMPLEMENT IN JS
-- confetti on setup complete
+
 
 
 Long Term backend TODO
