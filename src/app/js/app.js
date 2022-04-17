@@ -1,13 +1,11 @@
 'use strict'
 
 module.exports = client => {
-
   // Sometimes client does not load in time so we scan it until it exist then start the app
   const log = require('electron-log')
   const hashWorker = new Worker('./js/hash_worker.js', { type: 'module' })
 
   const imageArray = []
-  const hashArray = []
 
   const checkInterval = setInterval(() => {
     if (client != null) loadApp()
@@ -105,5 +103,5 @@ module.exports = client => {
 // hashWorker.postMessage(file.path)
 
 // hashWorker.onmessage = ({ data }) => {
-//   hashArray.push(data)
+//   data = hash string
 // }

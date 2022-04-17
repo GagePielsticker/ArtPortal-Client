@@ -6,6 +6,3 @@ electron-builder.env
 
 #packaged stuff
 dist/
-
-#database changes
-src/data/
