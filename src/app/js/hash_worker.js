@@ -1,5 +1,5 @@
 const { imageHash } = require('image-hash')
-const bits = 32
+const bits = 8
 
 addEventListener('message', e => {
   imageHash(e.data, bits, true, (error, data) => {

@@ -1,12 +1,13 @@
-Primary TODO
-- Re-verify updater is working
+How to load images and tie to data
 
+hash image when applying tags or any other persistant data
+Store hash of image in images metadata
+
+on load check images metadata for hash, then tie it to data if available
 
 Feature Plans
 - Pinterest tab? (loads pintrest in browser?)
 - Auto uploading to social media
-
-
 
 
 Important notes
