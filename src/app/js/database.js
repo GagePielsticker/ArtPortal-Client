@@ -10,29 +10,22 @@ module.exports = client => {
   // If our images json file doesnt exist create it
   client.db.createTable('images', location, (succ, msg) => {
     log.info('Creating image table/jsonfile.')
-
-    if (succ) {
-      log.info('Successfully created table/jsonfile.')
-    } else {
-      log.warn('Error creating table/jsonfile.')
-      log.warn(msg)
-    }
+    if (succ) return log.info('Successfully created table/jsonfile.')
+    log.warn('Error creating table/jsonfile.')
+    log.warn(msg)
   })
 
   // If our settings json file doesnt exist create it
   client.db.createTable('settings', location, (succ, msg) => {
     log.info('Creating settings/jsonfile.')
 
-    if (succ) {
-      log.info('Successfully created settings/jsonfile.')
-    } else {
-      log.warn('Error creating settings/jsonfile.')
-      log.warn(msg)
-    }
+    if (succ) return log.info('Successfully created settings/jsonfile.')
+    log.warn('Error creating settings/jsonfile.')
+    log.warn(msg)
   })
 
   /**
-   * Check to see if the user has completed setup
+   * Checks to see if database entry exist, if not create it then return issetupcomplete status
    * @returns <Promise> resolves if setup is complete, reject if not
    */
   client.isSetupComplete = () => {
@@ -44,7 +37,10 @@ module.exports = client => {
         if (!succ) {
           log.warn('setupFinished does not exist, writing.')
 
-          client.db.insertTableContent('settings', location, { setupFinished: false }, (succ, msg) => {
+          client.db.insertTableContent('settings', location, {
+            setupFinished: false,
+            currentDirectory: ''
+          }, (succ, msg) => {
             if (succ) log.info('Inserted setupFinished Record.')
             else log.warn(`Failed to insert first boot record: ${msg}`)
           })
@@ -57,6 +53,8 @@ module.exports = client => {
     })
   }
 
+  client.isSetupComplete() // Will create a settings entry if record isnt there
+
   /**
    * Changes the entry of our setup status in the DB
    * @param {Boolean} status
@@ -66,7 +64,7 @@ module.exports = client => {
     return new Promise((resolve, reject) => {
       log.info('Running changeSetupStatus()')
 
-      client.db.updateRow('settings', location, { setupFinished: false }, { setupFinished: status }, (succ, msg) => {
+      client.db.updateRow('settings', location, {}, { setupFinished: status }, (succ, msg) => {
         if (succ) {
           log.info('Successfully changed setupFinished status.')
           resolve()
@@ -86,6 +84,16 @@ module.exports = client => {
   client.changeDirectoryPath = path => {
     return new Promise((resolve, reject) => {
       log.info('Running changeDirectoryPath()')
+
+      client.db.updateRow('settings', location, {}, { currentDirectory: path }, (succ, msg) => {
+        if (succ) {
+          log.info('Successfully changed current Directory.')
+          resolve()
+        } else {
+          log.warn(`Could not change current Directory: ${msg}`)
+          reject()
+        }
+      })
     })
   }
 }

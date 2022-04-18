@@ -2,10 +2,6 @@
 
 module.exports = client => {
   // Sometimes client does not load in time so we scan it until it exist then start the app
-  const log = require('electron-log')
-  const hashWorker = new Worker('./js/hash_worker.js', { type: 'module' })
-
-  const imageArray = []
 
   const checkInterval = setInterval(() => {
     if (client != null) loadApp()
@@ -17,31 +13,12 @@ module.exports = client => {
     // Check if setup is complete
     await client.isSetupComplete()
       .then(() => {
-        log.info('Setup is complete, continuing...')
+        client.log.info('Setup is complete, continuing...')
       })
       .catch(() => {
-        log.info('Setup incomplete, loading setup screen')
+        client.log.info('Setup incomplete, loading setup screen')
         document.getElementById('setup').classList.remove('d-none') // If not reveal intro cover
       })
-
-    const alertLengthSeconds = 8
-
-    // Our warn alert
-    function warn (str) {
-      log.info(`Warn executing: ${str}`)
-      const alert = document.getElementById('warningAlert')
-      alert.innerHTML = str
-      alert.classList.remove('d-none')
-      setTimeout(() => {
-        alert.classList.add('animate__fast')
-        alert.classList.add('animate__fadeOutUp')
-        setTimeout(() => {
-          alert.classList.add('d-none')
-          alert.classList.remove('animate__fast')
-          alert.classList.remove('animate__fadeOutUp')
-        }, 800)
-      }, alertLengthSeconds * 1000)
-    }
 
     // On intro cover next button hit
     document.getElementById('stage1NextButton').addEventListener('click', () => {
@@ -63,11 +40,8 @@ module.exports = client => {
 
       // Check to make sure file field is populated
       if (folderSel.files.length == 0) {
-        return warn('No input folder given.')
+        return client.fn.warn('No input folder given.')
       }
-
-      // store to global array, calculate hashes on second array
-      const hashedSuccessful = 0
 
       for (let i = 0; i < folderSel.files.length; i++) { // For each item in the FileStore
         const file = folderSel.files.item(i)
@@ -81,7 +55,7 @@ module.exports = client => {
           extension == 'gif' ||
           extension == 'jpeg'
         ) {
-          imageArray.push(file.path) // Push to our file array if its a png,jpg,gif,or jpeg
+          client.imageArray.push(file.path) // Push to our file array if its a png,jpg,gif,or jpeg
         }
       }
 
@@ -94,14 +68,9 @@ module.exports = client => {
       }, 800)
 
       client.changeSetupStatus(true)
-      // TODO client.changeImageDirectory(path)
+      const ab = folderSel.files.item(0).path.split('\\')
+      ab.pop()
+      client.changeDirectoryPath(ab.join('\\'))
     })
   }
 }
-
-// Image hash getter example
-// hashWorker.postMessage(file.path)
-
-// hashWorker.onmessage = ({ data }) => {
-//   data = hash string
-// }

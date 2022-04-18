@@ -1,24 +1,18 @@
 Primary TODO
-- Change database settings structure to be 1 document and find all[0] to call it. (CHANGE ISSETUPCOMPLETE STUFF TOO)
-
-- Prototype application functions & ui
 - Re-verify updater is working
 
 
+Feature Plans
+- Pinterest tab? (loads pintrest in browser?)
+- Auto uploading to social media
 
-Long Term backend TODO
-- Select a folder to import
-- Loop over folder, calculate SHA1 hashes of each image
-- create database entry for each images hash with tags array (maximum 10 per)
-
-- create an add tag function to append a tag to a images entry in the database
-- create a remove tag function
 
 
 
 Important notes
 - The database files are not tracked for development sake, if any changes to the current structure (ie new tables) occur, update git
 - only supports png, jpeg, gif, jpg
+
 
 FEATURES ADDED CURRENTLY
 
