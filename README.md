@@ -12,7 +12,8 @@ An Electron based art reference organizer made for the open source community.
 
 ## Features
 
-- ADD STUFF ON RELEASE
+- Automatic updates handled through github releases
+- Local databasing to avoid image manipulation
 
 ## Infrastructure
 - **Electron**
